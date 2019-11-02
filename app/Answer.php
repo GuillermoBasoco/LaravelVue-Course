@@ -73,4 +73,9 @@ class Answer extends Model
       return $this->belongsTo(User::class);
     }
 
+    public function votes()
+    {
+      return $this->morphToMany(User::class,'votable');
+    }
+
 }
