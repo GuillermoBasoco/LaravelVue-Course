@@ -49,9 +49,29 @@ class Question extends Model
       return "unanswered";
     }
 
-    public function getBodyHtmlAttribute(){
+    public function getBodyHtmlAttribute()
+    {
+      return clean($this->bodyHtml());
+    }
 
+    public function setBodyAttribute($value)
+    {
+      $this->attributes['body'] = clean($value);
+    }
+
+    private function bodyHtml()
+    {
       return \Parsedown::instance()->text($this->body);
+    }
+
+    public function excerpt($length)
+    {
+      return Str::limit(strip_tags($this->bodyHtml()), $length);
+    }
+
+    public function getExcerptAttribute()
+    {
+      return $this->excerpt(250);
     }
 
     public function user()
@@ -68,7 +88,7 @@ class Question extends Model
     {
       return $this->belongsToMany(User::class, 'favorites','question_id','user_id')->withTimestamps();
     }
-    
+
     public function isFavorited()
     {
       return $this->favorites()->where('user_id',auth()->id())->count() >0 ;
