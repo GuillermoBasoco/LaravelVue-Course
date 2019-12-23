@@ -15,6 +15,14 @@ class Question extends Model
     */
     protected $fillable = ['title','body'];
 
+    /**
+    * The accessors to append to the model's array form.
+    *
+    * @var array
+    */
+    protected $appends = ['created_date'];
+
+
     public function setTitleAttribute($value)
     {
       $this->attributes['title'] = $value;
