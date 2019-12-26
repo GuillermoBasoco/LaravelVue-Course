@@ -11185,3 +11185,11 @@ form.form-delete {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+[v-cloak] {
+  display: none;
+}
+
+[v-cloak]::before {
+  content: "loading\2026";
+}
+

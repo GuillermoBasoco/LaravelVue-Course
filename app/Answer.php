@@ -19,7 +19,7 @@ class Answer extends Model
     *
     * @var array
     */
-    protected $appends = ['created_date'];
+    protected $appends = ['created_date', 'body_html'];
 
     public static function boot()
     {
