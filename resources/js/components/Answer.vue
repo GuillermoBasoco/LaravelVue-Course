@@ -28,10 +28,10 @@ export default {
           console.log(res);
           this.editing = false;
           this.bodyHtml = res.data.body_html;
-          alert(res.data.message);
+          this.$toast.success(res.data.message,"Success",{timeout: 3000});
         })
         .catch(err => {
-          alert(err.response.data.message);
+          this.$toast.error(err.response.data.message,"Error",{timeout: 3000});
         });
     },
     destroy () {
@@ -39,7 +39,7 @@ export default {
         axios.delete(this.endpoint)
         .then(res => {
           $(this.$el).fadeOut(500, () => {
-            alert(res.data.message);
+            this.$toast.success(res.data.message,"Success",{timeout: 3000});
           })
         });
       }
