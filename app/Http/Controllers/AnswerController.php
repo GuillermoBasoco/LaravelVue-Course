@@ -9,6 +9,21 @@ use Illuminate\Http\Request;
 class AnswerController extends Controller
 {
 
+    public function __construct()
+    {
+      $this->middleware('auth',['except' => ['index']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Question $question)
+    {
+        return $question->answers()->with('user')->simplePaginate(3);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
